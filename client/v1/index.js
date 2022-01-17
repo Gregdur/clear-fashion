@@ -48,25 +48,65 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // 🎯 TODO: Number of products
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
+const NumberOfProduct=marketplace.length;
+console.log('we have '+NumberOfProduct+' products')
+
 
 
 // 🎯 TODO: Brands name
 // 1. Create a variable and assign it the list of brands name only
 // 2. Log the variable
 // 3. Log how many brands we have
+const list_brands_name=[]
+marketplace.forEach(element => {
+  list_brands_name.push(element.brand)
+});
 
+console.log(list_brands_name);
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
+var list_sorted_price=marketplace;
 
+function Sort_List(attribut){
+  return function(a,b){
+    if(a[attribut]>b[attribut]){
+      return 1;
+    }
+    else if(a[attribut]<b[attribut]){
+      return -1;
+    }
+    return 0;
+  }
+}
+
+list_sorted_price.sort(Sort_List("price"));
+
+console.log(list_sorted_price);
 
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
 
+function Sort_List_Date(){
+  var List_Sorted_Date = [];
+  var j;
+  var dateFormat;
+  for(j=0;j < nb_products;j++){
+    dateFormat = marketplace[j].date.toString();
+    var temp =[new Date(dateFormat),marketplace[j].name,marketplace[j].brand,marketplace[j].price,marketplace[j].link];
+    List_Sorted_Date.push(temp);
+  }
+  List_Sorted_Date.sort(function(a,b){
+    return b[0] - a[0];
+  });
+  return List_Sorted_Date;
+}
+const List_Sorted_Date_Fin = Sort_List_Date();
+console.log(List_Sorted_Date_Fin);
 
 // 🎯 TODO: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
