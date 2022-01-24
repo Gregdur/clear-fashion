@@ -24,7 +24,7 @@ const setCurrentProducts = ({result, meta}) => {
 /**
  * Fetch products from api
  * @param  {Number}  [page=1] - current page to fetch
- * @param  {Number}  [size=12] - size of the page
+ * @param  {Number}  [size=24] - size of the page
  * @return {Object}
  */
 const fetchProducts = async (page = 1, size = 12) => {
