@@ -4,13 +4,13 @@
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
-
+let list_Filters={'brands':''}
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
-
+const selectBrand = document.querySelector('#brand-select');
 /**
  * Set global value
  * @param {Array} result - products to display
@@ -96,7 +96,33 @@ const renderIndicators = pagination => {
   spanNbProducts.innerHTML = count;
 };
 
+const renderBrands = products => {
+  const brandNames = [''];
+  for (const product of products) {
+    if (!(brandNames.includes(product.brand))) {
+      brandNames.push(product.brand);
+    }
+  }
+
+  selectBrand.innerHTML = Array.from(
+    brandNames,
+    value => `<option value="${value}">${value}</option>`
+  );
+  selectBrand.selectedIndex = brandNames.indexOf(currentFilters['brand']);
+};
+
+const filter_Products = products =>{
+  renderBrands(products);
+  if (currentFilters['brand'] !== '') {
+    products = products.filter(product =>
+      product['brand'] === currentFilters['brand']);
+  }
+
+  return products;
+};
+
 const render = (products, pagination) => {
+  products=filter_Products(products);
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
@@ -120,5 +146,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
 
   setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+});
+
+//pagination
+selectPage.addEventListener('change', event => {
+  fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
+    .then(setCurrentProducts)
+    .then(() => render(currentProducts, currentPagination));
+});
+
+//filter by brands
+selectBrand.addEventListener('change', event => {
+  currentFilters['brand'] = event.target.value;
   render(currentProducts, currentPagination);
 });
