@@ -4,7 +4,7 @@
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
-//let list_Filters={'brands':''}
+
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
@@ -12,6 +12,11 @@ const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const selectBrand = document.querySelector('#brand-select');
 const selectSort = document.querySelector('#sort-select');
+const p50=document.querySelector('#p50');
+const p90=document.querySelector('#p90');
+const p95=document.querySelector('#p95');
+const lastReleased = document.querySelector('#last-Release');
+
 /**
  * Set global value
  * @param {Array} result - products to display
@@ -87,14 +92,34 @@ const renderPagination = pagination => {
   selectPage.selectedIndex = currentPage - 1;
 };
 
+
+
+
+
+//section for function to display values on html
+function percentile(p){
+  var prod=currentProducts.sort((a, b) => a.price - b.price);
+  var i=Math.floor((p/100)*prod.length);
+  return prod[i].price;
+};
+
 /**
  * Render page selector
  * @param  {Object} pagination
  */
 const renderIndicators = pagination => {
   const {count} = pagination;
+  const perce50=percentile(50);
+  const perce90=percentile(90);
+  const perce95=percentile(95);
 
   spanNbProducts.innerHTML = count;
+
+  //section for function to display values on html
+
+  p50.innerHTML=perce50;
+  p90.innerHTML=perce90;
+  p95.innerHTML=perce95;
 };
 
 
@@ -154,6 +179,56 @@ function sort_By_Price_Desc(currentProducts){
   let products_by_price = currentProducts.sort((a, b) => b.price - a.price);
   sortbrand(products_by_price,selectBrand.value);
 }
+
+
+
+function compare_date_asc(a,b){
+  if (a.released < b.released){
+    return 1;
+  }
+  else if (a.released > b.released) {
+    return -1;
+  }
+  else {
+    return 0;
+  }
+}
+
+function compare_date_desc(a,b){
+  if (a.released>b.released){
+    return 1;
+  }
+  else if (a.released<b.released){
+    return -1;
+  }
+  else {
+    return 0;
+  }
+}
+
+
+function sort_By_Date_Asc(currentProducts){
+  let sortedproducts = currentProducts.sort(compare_date_desc);
+  sortbrand(sortedproducts,selectBrand.value);
+}
+
+function sort_By_Date_Desc(currentProducts){
+  let sortedproducts = currentProducts.sort(compare_date_asc);
+  sortbrand(sortedproducts,selectBrand.value);
+}
+
+
+function Sort_by_Last_release(currentProducts){
+  var date = new Date();
+  let RecentProducts = [];
+  for(let i = 0; i < currentProducts.length; i++){
+    var DateProduct = new Date(currentProducts[i].released);
+    if(date - DateProduct< 86400*15000){
+      RecentProducts.push(currentProducts[i]);
+    }
+  }
+  sortbrand(RecentProducts);
+}
 //Section for sort functions=================================================
 
 
@@ -162,11 +237,19 @@ function Selection(currentProducts,selectedSorting){
   if (selectedSorting == 'price-asc'){
     sort_By_Price_Asc(currentProducts);
   }  
-  else {
+  else if (selectedSorting == 'price-desc'){
     sort_By_Price_Desc(currentProducts);
   }
+  else if (selectedSorting == 'last-realease'){
+    Sort_by_Last_release(currentProducts);
+  }
+  else if (selectedSorting == 'date-desc'){
+    sort_By_Date_Asc(currentProducts);
+  }
+  else{
+    sort_By_Date_Desc(currentProducts);
+  }
 }
-
 
 
 /**
