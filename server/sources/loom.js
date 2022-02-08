@@ -1,10 +1,10 @@
-const axios = require('axios');
+const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 
 /**
- * Parse webpage restaurant
+ * Parse webpage e-shop
  * @param  {String} data - html response
- * @return {Object} restaurant
+ * @return {Object} products
  */
 const parse = data => {
   const $ = cheerio.load(data);
