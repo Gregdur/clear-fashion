@@ -9,23 +9,18 @@ const cheerio = require('cheerio');
 const parse = data => {
   const $ = cheerio.load(data);
 
-  return $('.product-grid__item')
+  return $('.item')
     .map((i, element) => {      
-      return {    
-        'brand': 'loom',
-        'price': parseInt(
-          $(element)
-            .find('.money')
-            .text()
-        ),
-        'name': $(element)
-          .find('.product-title')
-          .text()
-          .trim()
-          .replace(/\s/g, ' ')        
-      };
-    })
-    .get();
+      const name = $(element)
+    .find('.product-name')
+    .text().trim();
+    const price = parseFloat(
+    $(element)
+      .find('.price')
+      .text()
+    )
+    return {name, price};
+  }).get();
 };
 
 module.exports.scrape = async url => {

@@ -1,32 +1,22 @@
 const cheerio = require('cheerio');
+const fetch = require('node-fetch');
 
-/**
- * Parse webpage e-shop
- * @param  {String} data - html response
- * @return {Array} products
- */
-const parse = data => {
+
+const parse = (data) => {
   const $ = cheerio.load(data);
-
-  return $('.product_list .product-container')
-  .map((i, element) => {      
-    return {    
-      'brand': 'Adresse Paris',
-      'price': parseFloat(
-                 $(element)
-                   .find('.price.product-price')
-                   .text()
-      ),
-      'name': $(element)
-               .find('.product-name')
-               .attr('title')
-               .text()
-               .trim()
-               .replace(/\s/g, ' ')     
-    };
-  })
-  .get();
-};  
+  return $('.product-container')
+  .map((i, element)=> {
+    const name = $(element)
+    .find('.product-name-container.versionpc .product-name')
+    .attr('title');
+    const price = parseFloat(
+    $(element)
+      .find('.price.product-price')
+      .text()
+  );
+  return {name, price};
+  }).get();
+};
 
 /**
  * Scrape all the products for a given url page
