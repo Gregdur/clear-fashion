@@ -34,44 +34,44 @@ const montlimarbrand = require('./sources/Montlimart');
 //  }
 
 //dedicated
-// async function sandbox (eshop = 'https://www.dedicatedbrand.com/en/men/all-men?p=') {
-//    try {
-//      console.log(`🕵️‍♀️  browsing ${eshop} source`);
-//      let allproduct=[];
-//      for(let i=1; ;i++){
-//         const product = await dedicatedbrand.scrape(eshop + i.toString());
-//         const len=product.length;
-//         //allproduct=allproduct.concat(product);
-//         if (len!=0){
-//           //console.log(allproduct);
-//           //allproduct=allproduct.concat(product);
-//           product.forEach(item => allproduct.push(item));
-//           console.log(product);
-//         }
-//         else{                    
-//           //console.log(allproducts);
-//           console.log('done');
-//           process.exit(0);
-//         }
-//         const fs = require('fs');
+async function sandbox (eshop = 'https://www.dedicatedbrand.com/en/men/all-men?p=') {
+   try {
+     console.log(`🕵️‍♀️  browsing ${eshop} source`);
+     let allproduct=[];
+     for(let i=1; ;i++){
+        const product = await dedicatedbrand.scrape(eshop + i.toString());
+        const len=product.length;
+        //allproduct=allproduct.concat(product);
+        if (len!=0){
+          //console.log(allproduct);
+          //allproduct=allproduct.concat(product);
+          product.forEach(item => allproduct.push(item));
+          console.log(product);
+        }
+        else{                    
+          //console.log(allproducts);
+          console.log('done');
+          process.exit(0);
+        }
+        const fs = require('fs');
 
-//         const data = JSON.stringify(allproduct);
+        const data = JSON.stringify(allproduct);
 
-//         fs.writeFile('listes_dedicatedbrand.json', data, (err) => {
-//         if (err) {              
-//           throw err;
-//         }
+        fs.writeFile('listes_dedicatedbrand.json', data, (err) => {
+        if (err) {              
+          throw err;
+        }
         
-//       });
-//     };
+      });
+    };
 
       
-//    } 
-//    catch (e) {
-//      console.error(e);
-//      process.exit(1);
-//    }
-//  }
+   } 
+   catch (e) {
+     console.error(e);
+     process.exit(1);
+   }
+ }
 
 
 
@@ -109,34 +109,34 @@ const montlimarbrand = require('./sources/Montlimart');
 
 
 // montlimart : https://www.montlimart.com/toute-la-collection.html
-async function sandbox (eshop = 'https://www.montlimart.com/toute-la-collection.html') {
-     try {
-     console.log(`🕵️‍♀️  browsing ${eshop} source`);
+// async function sandbox (eshop = 'https://www.montlimart.com/toute-la-collection.html') {
+//      try {
+//      console.log(`🕵️‍♀️  browsing ${eshop} source`);
 
-    const product = await montlimarbrand.scrape(eshop);
+//     const product = await montlimarbrand.scrape(eshop);
 
-    let allproduct=[];
-    product.forEach(item => allproduct.push(item));
-    const fs = require('fs');
+//     let allproduct=[];
+//     product.forEach(item => allproduct.push(item));
+//     const fs = require('fs');
 
-    const data = JSON.stringify(allproduct);
+//     const data = JSON.stringify(allproduct);
 
-    fs.writeFile('listes_Montlimard.json', data, (err) => {
-    if (err) {              
-      throw err;
-    }
+//     fs.writeFile('listes_Montlimard.json', data, (err) => {
+//     if (err) {              
+//       throw err;
+//     }
         
-    });
+//     });
 
 
-    console.log(product);
-    console.log('done');
-    // process.exit(0);
-   } catch (e) {
-     console.error(e);
-     process.exit(1);
-   }
- }
+//     console.log(product);
+//     console.log('done');
+//     // process.exit(0);
+//    } catch (e) {
+//      console.error(e);
+//      process.exit(1);
+//    }
+//  }
 
 
 
@@ -145,3 +145,6 @@ async function sandbox (eshop = 'https://www.montlimart.com/toute-la-collection.
 const [,, eshop] = process.argv;
 
 sandbox(eshop);
+//QBPypZx6YhxnIY8f
+//gregdur
+//mongodb+srv://gregdur:<password>@clearfashion.93alo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
