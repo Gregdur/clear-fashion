@@ -40,8 +40,9 @@ async function sandbox (eshop = 'https://www.dedicatedbrand.com/en/men/all-men?p
  
 
 async function sandbox3(){
-  
+  db.clean();
+  console.log('cleaning done !')
 }
 
 
-sandbox2();
+sandbox3();
