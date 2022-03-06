@@ -1,12 +1,40 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 
+// /**
+//  * Parse webpage e-shop
+//  * @param  {String} data - html response
+//  * @return {Array} products
+//  */
+// const parse = data => {
+//   const $ = cheerio.load(data);
+
+//   return $('.productList-container .productList')
+//     .map((i, element) => {
+//       const name = $(element)
+//         .find('.productList-title')
+//         .text()
+//         .trim()
+//         .replace(/\s/g, ' ');
+       
+//       const price = parseInt(
+//         $(element)
+//           .find('.productList-price')
+//           .text()
+//       );
+
+//       return {name, price};
+//     })
+//     .get();
+// };
+
+
 /**
  * Parse webpage e-shop
  * @param  {String} data - html response
  * @return {Array} products
  */
-const parse = data => {
+ const parse = data => {
   const $ = cheerio.load(data);
 
   return $('.productList-container .productList')
@@ -23,11 +51,10 @@ const parse = data => {
           .text()
       );
 
-      return {name, price};
+      return {'brand':'Dedicated',name, price};
     })
     .get();
 };
-
 
 
 

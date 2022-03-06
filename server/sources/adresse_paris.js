@@ -2,6 +2,23 @@ const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 
 
+// const parse = (data) => {
+//   const $ = cheerio.load(data);
+//   return $('.product-container')
+//   .map((i, element)=> {
+//     const name = $(element)
+//     .find('.product-name-container.versionpc .product-name')
+//     .attr('title');
+//     const price = parseFloat(
+//     $(element)
+//       .find('.price.product-price')
+//       .text()
+//   );
+//   return {name, price};
+//   }).get();
+// };
+
+
 const parse = (data) => {
   const $ = cheerio.load(data);
   return $('.product-container')
@@ -14,9 +31,10 @@ const parse = (data) => {
       .find('.price.product-price')
       .text()
   );
-  return {name, price};
+  return {'brand':'Adresse Paris',name, price};
   }).get();
 };
+
 
 /**
  * Scrape all the products for a given url page
