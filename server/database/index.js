@@ -62,3 +62,14 @@ module.exports.insert = async products => {
       console.error('🚨 collection.deleteMany...', error);
     }
   };
+
+  module.exports.find = async requete => {
+    try{
+      const db = await getDB();
+      const collection = db.collection(MONGODB_COLLECTION);
+      const result= await collection.find(requete).toArray();
+      return result;
+    }catch (error) {
+      console.error('🚨 collection.find...', error);
+    }
+  };

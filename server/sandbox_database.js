@@ -87,5 +87,13 @@ async function sandbox3(){
 }
 
 
-sandbox2();
+async function sandbox4(){
+  const relatedBrands=await db.find({'brand':'Adresse Paris'});
+  console.log(relatedBrands);
+  console.log(` ${relatedBrands.length} products returned`);
+}
+
+//sandbox2();
 //sandbox3();
+
+sandbox4();
