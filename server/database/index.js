@@ -51,3 +51,14 @@ module.exports.insert = async products => {
       console.error('🚨 MongoClient.close...', error);
     }
   };
+
+
+  module.exports.clean = async () => {
+    try{
+      const db = await getDB();
+      const collection = db.collection(MONGODB_COLLECTION);
+      const result= await collection.deleteMany({});
+    }catch (error) {
+      console.error('🚨 collection.deleteMany...', error);
+    }
+  };

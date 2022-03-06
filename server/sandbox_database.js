@@ -39,5 +39,9 @@ async function sandbox (eshop = 'https://www.dedicatedbrand.com/en/men/all-men?p
     }
  
 
+async function sandbox3(){
+  
+}
+
 
 sandbox2();
