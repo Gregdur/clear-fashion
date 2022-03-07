@@ -93,7 +93,15 @@ async function sandbox4(){
   console.log(` ${relatedBrands.length} products returned`);
 }
 
+//insert
+//sandbox();
+
 //sandbox2();
+
+//delete;
 //sandbox3();
 
-sandbox4();
+//products related by brands
+//sandbox4();
+
+//products under a certain price
