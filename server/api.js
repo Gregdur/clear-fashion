@@ -14,9 +14,24 @@ app.use(helmet());
 
 app.options('*', cors());
 
+
 app.get('/', (request, response) => {
   response.send({'ack': true});
 });
+
+
+const db = require('./database');
+
+
+app.get('//p', (request, response) => {
+  response.send({'rat': true});
+});
+
+app.get('/products/brand/', async(request, response) => {
+  products = await db.find({'brand':'Adresse Paris'}, false)
+  //console.log(products.length)
+  response.send({"products" : products});
+})
 
 app.listen(PORT);
 
