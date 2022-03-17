@@ -31,7 +31,15 @@ const parse = (data) => {
       .find('.price.product-price')
       .text()
   );
-  return {'brand':'Adresse Paris',name, price};
+  const photo = $(element)
+      .find('.product_img_link')
+      .children()
+      .attr('data-original');
+      const link = $(element)
+      .find('.product_img_link')
+      .attr('href');
+
+  return {'brand':'Adresse Paris',name, price,link,photo};
   }).get();
 };
 

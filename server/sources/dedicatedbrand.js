@@ -51,6 +51,8 @@ const cheerio = require('cheerio');
           .text()
       );
 
+      
+
       return {'brand':'Dedicated',name, price};
     })
     .get();

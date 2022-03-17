@@ -41,8 +41,18 @@ const cheerio = require('cheerio');
     $(element)
       .find('.price')
       .text()
-    )
-    return {'brand':'Montlimart',name, price};
+    );
+    const link = $(element)
+        .find('.product-name')
+        .children()
+        .attr('href');
+        var photo = $(element)
+        .find('.product-image')
+        .children()
+        .children()
+        .attr('src');
+
+    return {'brand':'Montlimart',name, price,link,photo};
   }).get();
 };
 
