@@ -27,13 +27,21 @@ app.get('//p', (request, response) => {
   response.send({'rat': true});
 });
 
-app.get('/products/brand/', async(request, response) => {
-  products = await db.find({'brand':'Adresse Paris'}, false)
+app.get('/products', async(request, response) => {
+  products = await db.findAllProducts(true)
+  console.log(products.length)
+  response.send({"products" : products});
+})
+
+//http://localhost:8092/products/brand=?brand=Dedicated
+app.get('/products/brand=', async(request, response) => {
+  let brand = request.query.brand;
+  products = await db.find({'brand': `${brand}`}, false)
   //console.log(products.length)
   response.send({"products" : products});
 })
 
-
+//http://localhost:8092/products/search?limit=5&brand=Dedicated&price=30
 app.get('/products/search', async (request, response)=> {
   
   console.log(request.query);

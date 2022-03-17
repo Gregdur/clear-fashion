@@ -74,6 +74,14 @@ module.exports.find = async query => {
   }
 };
 
+module.exports.findAllProducts = async (printResults = false) => {
+  const db = await getDB();
+  const collection=db.collection(MONGODB_COLLECTION);
+  const result = await collection.find().toArray()
+  
+  return result
+}
+
 
 module.exports.aggregate = async query => {
   try {
