@@ -20,7 +20,7 @@ app.get('/', (request, response) => {
 });
 
 
-const db = require('./database');
+const db = require('./db');
 
 
 app.get('//p', (request, response) => {
@@ -32,6 +32,26 @@ app.get('/products/brand/', async(request, response) => {
   //console.log(products.length)
   response.send({"products" : products});
 })
+
+
+app.get('/products/search', async (request, response)=> {
+  
+  console.log(request.query);
+  
+  let limit = parseInt(request.query.limit);
+  let brand = request.query.brand;
+  let price = parseInt(request.query.price);
+  console.log(limit);
+  console.log(brand);
+  console.log(price);
+  let res = await db.filteredproducts(limit, brand, price);
+
+  response.send({
+    'limit' : limit,
+    'results' : res
+  });
+})
+
 
 app.listen(PORT);
 
