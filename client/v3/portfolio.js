@@ -16,6 +16,8 @@ const p50=document.querySelector('#p50');
 const p90=document.querySelector('#p90');
 const p95=document.querySelector('#p95');
 const lastReleased = document.querySelector('#last-Release');
+const FavoriteProducts = document.querySelector('#By-favorite-products');
+const ReasonablePrice = document.querySelector('#By-reasonable-price'); 
 
 /**
  * Set global value
@@ -66,7 +68,7 @@ const renderProducts = products => {
 
         <h4><span>${product.brand}</span>
         <a href="${product.link}">${product.name}</a>
-        <span>${product.price}</span></h4>
+        <span>${product.price} €</span></h4>
       </div>
     `;
     })
@@ -118,9 +120,9 @@ const renderIndicators = pagination => {
 
   //section for function to display values on html
 
-  p50.innerHTML=perce50;
-  p90.innerHTML=perce90;
-  p95.innerHTML=perce95;
+  p50.innerHTML=perce50 + " €";
+  p90.innerHTML=perce90 + " €";
+  p95.innerHTML=perce95 + " €";
 };
 
 
