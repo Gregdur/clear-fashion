@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>👕 Clear Fahion | Environmentally & human-friendly clothes</title>
+    <link rel="stylesheet" href="base.css" />
+  </head>
+  <body>
+    <h1>Clear fashion</h1>
+
+   
+    <section id="options">    
+      <div id="show">
+        <label for="show-select">Show:</label>
+        <select name="show" id="show-select">
+          <option value="12">12</option>
+          <option value="24">24</option>
+          <option value="48">48</option>
+        </select>
+      </div>
+
+      <div id="page">
+        <label for="page-select">Go to page:</label>
+        <select name="page" id="page-select"> </select>
+      </div>
+      <div id="filters">
+        <span>By reasonable price</span>
+        <span>By recently released</span>
+        <div id="brand">
+          <label for="brand-select">By brands:</label>
+          <select name="brand" id="brand-select"> </select>
+        </div>
+      </div>
+      <div id="sort">
+        <label for="sort-select">Sort:</label>
+        <select name="sort" id="sort-select">
+          <option value="price-asc">Cheaper</option>
+          <option value="price-desc">Expensive</option>
+          <option value="date-asc">Recently released</option>
+          <option value="date-desc">Anciently released</option>
+          <option value="last-realease">Last released</option>
+        </select>
+      </div>
+    </section>
+    <section id="indicators">
+      <h2>Indicators</h2>
+      <div>
+        <h5>Number of products</h5>
+        <h5 id="nbProducts">0</h5>
+      </div>
+      <div>
+        <h5>Number of new products</h5>
+        <h5>0</h5>
+      </div>
+      <div>
+        <h5>p50 price value</h5>
+        <h5 id="p50">0</h5>
+      </div>
+      <div>
+        <h5>p90 price value</h5>
+        <h5 id="p90">0</h5>
+      </div>
+      <div>
+        <h5>p95 price value</h5>
+        <h5 id="p95">0</h5>
+      </div>
+      <div>
+        <h5>Last released date</h5>
+        <h5>2020-01-01</h5>
+      </div>
+    </section>
+    <div class="products-heading">
+    <section id="products"></section>
+    </div>
+    <script type="text/javascript" charset="UTF-8" src="portfolio.js"></script>
+  </body>
+</html>
