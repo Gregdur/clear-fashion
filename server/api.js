@@ -52,12 +52,12 @@ app.get('/products/search', async (request, response)=> {
   console.log(limit);
   console.log(brand);
   console.log(price);
-  let res = await db.filteredproducts(limit, brand, price);
-
-  response.send({
-    'limit' : limit,
-    'results' : res
-  });
+  let products = await db.filteredproducts(limit, brand, price);
+  response.send({"products" : products});
+  // response.send({
+  //   'limit' : limit,
+  //   'results' : res
+  // });
 })
 
 
