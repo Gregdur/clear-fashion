@@ -61,6 +61,28 @@ app.get('/products/search', async (request, response)=> {
 })
 
 
+app.get('/browse', async(req, response) => {
+  try{
+     
+    let res = await db.findPage(parseInt(req.query.page),parseInt(req.query.size));
+    let meta = await db.getMeta(parseInt(req.query.page),parseInt(req.query.size));
+     
+  let products = {
+    "success" : true,
+    "data" : {
+    "result" : res,
+    "meta": meta
+      }}
+  response.send(products);
+
+    
+  }catch(e){
+    response.send(e)
+  }
+})
+
+
+
 app.listen(PORT);
 
 console.log(`📡 Running on port ${PORT}`);
