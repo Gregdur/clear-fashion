@@ -71,7 +71,11 @@ const renderProducts = products => {
 
         <h4><span>${product.brand}</span>
         <a href="${product.link}">${product.name}</a>
-        <span>${product.price} €</span></h4>
+        <span>${product.price} €</span>
+        <span>
+          <input type="checkbox" >
+          <label for="favorite-product">Add to your favs</label>
+          </span></h4>
       </div>
     `;
     })
@@ -238,6 +242,9 @@ function Sort_by_Last_release(currentProducts){
 //Section for sort functions=================================================
 
 
+
+
+
 function Selection(currentProducts,selectedSorting){
 
   if (selectedSorting == 'price-asc'){
@@ -256,6 +263,12 @@ function Selection(currentProducts,selectedSorting){
     sort_By_Date_Desc(currentProducts);
   }
 }
+
+
+//=====================================
+//Favorite Section
+//=====================================
+
 
 
 /**
