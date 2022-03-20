@@ -5,6 +5,8 @@
 let currentProducts = [];
 let currentPagination = {};
 
+let favoriteProducts = [];
+
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
@@ -38,8 +40,8 @@ const setCurrentProducts = ({result, meta}) => {
 const fetchProducts = async (page = 1, size = 12) => {
   try {
     const response = await fetch(
-      `https://clear-fashion-sand.vercel.app/browse?page=${page}&size=${size}`
-      //`https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+      // `https://clear-fashion-sand.vercel.app/browse?page=${page}&size=${size}`
+      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
     );
     const body = await response.json();
 
