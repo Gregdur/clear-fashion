@@ -89,5 +89,6 @@ h5 {
 
 
 .fit-picture {
-  width: 250px;
+  width: 50px;
+  vertical-align:-100%;
 }

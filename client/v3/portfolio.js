@@ -58,7 +58,8 @@ const fetchProducts = async (page = 1, size = 12) => {
 };
 
 
-
+//<input type="checkbox" onclick="FavoriteChecked('${product.uuid}') >
+//<label for="favorite-product">Add to your favs</label>
 //if you want to display the image add:<img class="fit-picture" src=${product.photo}> in h4
 /**
  * Render list of products
@@ -77,9 +78,11 @@ const renderProducts = products => {
         <a href="${product.link}">${product.name}</a>
         <span>${product.price} €</span>
         <span>
-          <input type="checkbox" onclick="FavoriteChecked('${product.uuid}') >
-          <label for="favorite-product">Add to your favs</label>
-          </span></h4>
+        <button data-id="${product.uuid}" class="favorite"></button>
+        <label for="favorite-product">Add to your favs</label>
+          </span>
+          <span><img class="fit-picture" src=${product.photo}></span>
+          </h4>
 
       </div>
     `;
@@ -178,6 +181,8 @@ const render = (products, pagination) => {
   renderIndicators(pagination);
   const brand=ListBrands(currentProducts);
   renderBrands(brand);
+  document.querySelectorAll('.favorite').forEach(item =>
+    item.addEventListener('click', saveAsFavorite, false));
 };
 
 
@@ -257,22 +262,19 @@ function SortChoice(products,Sort){
 //=====================================
 //Favorite Section
 //=====================================
-function FavoriteChecked(id_prod){
-  const product = currentProducts.find(product => {
-    return product.uuid === id_prod;
-  });
-  favoriteProducts.push(product);
-  render(currentProducts,currentPagination); 
-}
 
-function showFavorites(){
-  currentProducts=favoriteProducts;
-}
+const saveAsFavorite = e => {
+  const uuid = e.currentTarget.getAttribute('data-id');
+  if (favoriteProducts.some(p => p.uuid === uuid)) {
+    favoriteProducts = favoriteProducts.filter(p => p.uuid !== uuid);
+  } else {
+    favoriteProducts.push(currentProducts.find(p => p.uuid === uuid));
+  }
+  render(currentProducts, currentPagination);
+};
 
 
 FavoriteProducts.addEventListener('change', async (event) => {
-
-  showFavorites()
   const products = await fetchProducts();
   setCurrentProducts(products);
   render(favoriteProducts, currentPagination);
