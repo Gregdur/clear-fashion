@@ -57,6 +57,9 @@ const fetchProducts = async (page = 1, size = 12) => {
   }
 };
 
+
+
+//if you want to display the image add:<img class="fit-picture" src=${product.photo}> in h4
 /**
  * Render list of products
  * @param  {Array} products
@@ -76,8 +79,7 @@ const renderProducts = products => {
         <span>
           <input type="checkbox" onclick="FavoriteChecked('${product.uuid}') >
           <label for="favorite-product">Add to your favs</label>
-          </span>
-          <img src=${product.photo}></h4>
+          </span></h4>
 
       </div>
     `;
@@ -182,54 +184,6 @@ const render = (products, pagination) => {
 
 //Section for sort functions=================================================
 
-function sort_By_Price_Asc(currentProducts){
-  let products_by_price = currentProducts.sort((a, b) => a.price - b.price);
-  sortbrand(products_by_price,selectBrand.value);
-}
-
-
-function sort_By_Price_Desc(currentProducts){
-  let products_by_price = currentProducts.sort((a, b) => b.price - a.price);
-  sortbrand(products_by_price,selectBrand.value);
-}
-
-
-
-function compare_date_asc(a,b){
-  if (a.released < b.released){
-    return 1;
-  }
-  else if (a.released > b.released) {
-    return -1;
-  }
-  else {
-    return 0;
-  }
-}
-
-function compare_date_desc(a,b){
-  if (a.released>b.released){
-    return 1;
-  }
-  else if (a.released<b.released){
-    return -1;
-  }
-  else {
-    return 0;
-  }
-}
-
-
-function sort_By_Date_Asc(currentProducts){
-  let sortedproducts = currentProducts.sort(compare_date_desc);
-  sortbrand(sortedproducts,selectBrand.value);
-}
-
-function sort_By_Date_Desc(currentProducts){
-  let sortedproducts = currentProducts.sort(compare_date_asc);
-  sortbrand(sortedproducts,selectBrand.value);
-}
-
 
 function Sort_by_Last_release(currentProducts){
   var date = new Date();
@@ -244,26 +198,58 @@ function Sort_by_Last_release(currentProducts){
 }
 //Section for sort functions=================================================
 
+const sort_by_brand = (products, brand) => {
+  const brand_product = [];
+  products.forEach(element => {
+    if (element["b"] == brand){
+      brand_product.push(element)
+    }
+  });
+  renderProducts(brand_product);
+};
 
-
-
-
-function Selection(currentProducts,selectedSorting){
-
-  if (selectedSorting == 'price-asc'){
-    sort_By_Price_Asc(currentProducts);
-  }  
-  else if (selectedSorting == 'price-desc'){
-    sort_By_Price_Desc(currentProducts);
-  }
-  else if (selectedSorting == 'last-realease'){
-    Sort_by_Last_release(currentProducts);
-  }
-  else if (selectedSorting == 'date-desc'){
-    sort_By_Date_Asc(currentProducts);
+function sortby_price(list,desc){
+  console.log("prices")
+  if(desc){
+    return list.sort(function (a, b) {
+      return a.price - b.price;
+    });
   }
   else{
-    sort_By_Date_Desc(currentProducts);
+    return list.sort(function (a, b) {
+      return b.price - a.price;
+    });
+  }
+}
+
+function sortby_date(list,desc){
+  console.log("dates")
+  return list.sort(function (a, b) {
+    var date1 = new Date(a.released);
+    var date2 = new Date(b.released);
+    if(desc){
+      return  date1-date2;
+    }
+    else{
+      return  date2-date1;
+
+    }
+  });
+}
+
+
+function SortChoice(products,Sort){
+  switch(Sort){
+    case "price-asc":
+      return sortby_price(products,true);
+    case "price-desc":
+      return sortby_price(products,false);
+    case "date-asc":
+      return sortby_date(products,true);
+    case "date-desc":
+      return sortby_date(products,false);
+    default :
+      return products;
   }
 }
 
@@ -321,10 +307,10 @@ selectBrand.addEventListener('change',event=>{
   Selection(currentProducts,selectSort.value);
 });
 
-selectSort.addEventListener('change',event => {
-  Selection(currentProducts,event.target.value);
-  
+selectSort.addEventListener('change', event => {
+  renderProducts(SortChoice(currentProducts, event.target.value));
 });
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
