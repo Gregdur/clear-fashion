@@ -66,6 +66,7 @@ const renderProducts = products => {
   const div = document.createElement('div');
   const template = products
     .map(product => {
+      
       return `
       <div class="product" id=${product.uuid}>
 
@@ -73,9 +74,11 @@ const renderProducts = products => {
         <a href="${product.link}">${product.name}</a>
         <span>${product.price} €</span>
         <span>
-          <input type="checkbox" >
+          <input type="checkbox" onclick="FavoriteChecked('${product.uuid}') >
           <label for="favorite-product">Add to your favs</label>
-          </span></h4>
+          </span>
+          <img src=${product.photo}></h4>
+
       </div>
     `;
     })
@@ -268,7 +271,26 @@ function Selection(currentProducts,selectedSorting){
 //=====================================
 //Favorite Section
 //=====================================
+function FavoriteChecked(id_prod){
+  const product = currentProducts.find(product => {
+    return product.uuid === id_prod;
+  });
+  favoriteProducts.push(product);
+  render(currentProducts,currentPagination); 
+}
 
+function showFavorites(){
+  currentProducts=favoriteProducts;
+}
+
+
+FavoriteProducts.addEventListener('change', async (event) => {
+
+  showFavorites()
+  const products = await fetchProducts();
+  setCurrentProducts(products);
+  render(favoriteProducts, currentPagination);
+});
 
 
 /**
