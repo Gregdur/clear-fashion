@@ -34,8 +34,22 @@ app.get('/', (request, response) => {
   response.send({'ack': true});
 });
 
+let client;
+const options = {
 
-const db = require('./db');
+  useUnifiedTopology: true,
+
+  useNewUrlParser: true,
+
+};
+
+async function GetCollection(){
+  client = await new MongoClient(MONGODB_URI, options);
+  const db=client.db(MONGODB_DB_NAME);
+  const collection=db.collection(MONGODB_COLLECTION);
+}
+
+
 
 
 app.get('//p', (request, response) => {

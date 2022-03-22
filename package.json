@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "mongodb": "^4.4.0"
+    "mongodb": "^4.4.0",
+    "paginate-info": "^1.0.4"
   }
 }
