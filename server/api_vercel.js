@@ -1,12 +1,21 @@
 "use strict";
 
 // Import the dependency.
-const clientPromise = require('./mongodb-client');
-const ObjectId = require("mongodb").ObjectID;
 
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
+
+const { MongoClient } = require('mongodb');
+const {calculatedlimitAndOffset,paginate}=require('paginate-info');
+
+require('dotenv').config();
+
+const MONGODB_DB_NAME = 'products';
+const MONGODB_COLLECTION = 'products';
+const MONGODB_URI = "mongodb+srv://gregdur:QBPypZx6YhxnIY8f@clearfashion.93alo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+
 
 const PORT = 8092;
 
