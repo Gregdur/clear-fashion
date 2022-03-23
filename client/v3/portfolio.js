@@ -41,7 +41,9 @@ const fetchProducts = async (page = 1, size = 12) => {
   try {
     const response = await fetch(
       // `https://clear-fashion-sand.vercel.app/browse?page=${page}&size=${size}`
-      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+      //`https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+      `https://server-nine-khaki.vercel.app/products/search?page=${page}&limit=${size}`
+      
     );
     const body = await response.json();
 

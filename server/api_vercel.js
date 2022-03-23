@@ -72,6 +72,7 @@ async function GetCollection(){
 // })
 
 //http://localhost:8092/products/search?page=1&limit=12&brand=Montlimart
+//https://server-nine-khaki.vercel.app/products/search?page=1&limit=12&brand=Montlimart
 app.get('/products/search', async (request, response)=> {
   var filters={};
   var collection=await GetCollection();
