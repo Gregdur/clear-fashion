@@ -82,6 +82,58 @@ const fetchProductsBrand = async (page = 1, size = 12,brand="") => {
   }
 };
 
+
+
+const fetchProductsFinal = async (page = 1, size = 12,brand="") => {
+  
+    if(brand="All"){
+      try {
+        const response = await fetch(
+          // `https://clear-fashion-sand.vercel.app/browse?page=${page}&size=${size}`
+          //`https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+          `https://server-nine-khaki.vercel.app/products/search?page=${page}&limit=${size}`
+          
+        );
+        const body = await response.json();
+    
+        if (body.success !== true) {
+          console.error(body);
+          return {currentProducts, currentPagination};
+        }
+    
+        return body.data;
+      } catch (error) {
+        console.error(error);
+        return {currentProducts, currentPagination};
+      }
+    }
+    else{
+      try {
+        const response = await fetch(
+          // `https://clear-fashion-sand.vercel.app/browse?page=${page}&size=${size}`
+          //https://clear-fashion-api.vercel.app/?page=1&size=12&brand=
+          //`https://clear-fashion-api.vercel.app?page=${page}&size=${size}&brand=${brand}`
+          `https://server-nine-khaki.vercel.app/products/search?page=${page}&limit=${size}&brand=${brand}`
+        );
+        const body = await response.json();
+    
+        if (body.success !== true) {
+          console.error(body);
+          return {currentProducts, currentPagination};
+        }
+    
+        return body.data;
+      } catch (error) {
+        console.error(error);
+        return {currentProducts, currentPagination};
+      }
+    }
+    
+};
+
+
+
+
 //<input type="checkbox" onclick="FavoriteChecked('${product.uuid}') >
 //<label for="favorite-product">Add to your favs</label>
 //if you want to display the image add:<img class="fit-picture" src=${product.photo}> in h4
@@ -309,7 +361,22 @@ selectShow.addEventListener('change', async (event) => {
 
 //pagination
 selectPage.addEventListener('change', event => {
-  fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
+  // if(selectBrand.value=='All'){
+  //   fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
+  //   .then(setCurrentProducts)
+  //   .then(() => render(currentProducts, currentPagination));
+  // }
+  // else{
+  //   const products = await fetchProductsBrand(selectPage.value,selectShow.value,selectBrand.value);
+
+  //   setCurrentProducts(products);
+  //   render(currentProducts, currentPagination);
+  // }
+  // fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
+  //   .then(setCurrentProducts)
+  //   .then(() => render(currentProducts, currentPagination));
+
+  fetchProductsFinal(parseInt(event.target.value),currentPagination.pageSize,selectBrand.value)
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
 });
