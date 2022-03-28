@@ -65,7 +65,8 @@ const fetchProductsBrand = async (page = 1, size = 12,brand="") => {
     const response = await fetch(
       // `https://clear-fashion-sand.vercel.app/browse?page=${page}&size=${size}`
       //https://clear-fashion-api.vercel.app/?page=1&size=12&brand=
-      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}&brand=${brand}`
+      //`https://clear-fashion-api.vercel.app?page=${page}&size=${size}&brand=${brand}`
+      `https://server-nine-khaki.vercel.app/products/search?page=${page}&limit=${size}&brand=${brand}`
     );
     const body = await response.json();
 
@@ -200,7 +201,8 @@ const render = (products, pagination) => {
 
 
 const render1=(products, pagination) => {
-  const brand=ListBrands(currentProducts);
+  // const brand=ListBrands(currentProducts);
+  const brand=['All','Dedicated','Montlimart','Adresse Paris']
   renderBrands(brand);  
 };
 
@@ -315,10 +317,22 @@ selectPage.addEventListener('change', event => {
 //filter by brands
 
 selectBrand.addEventListener('change', async event=>{
-  const products = await fetchProductsBrand(selectPage.value,selectShow.value,event.target.value);
+  if(event.target.value=='All'){
+    const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
 
-  setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+    setCurrentProducts(products);
+    render(currentProducts, currentPagination);
+  }
+  else{
+    const products = await fetchProductsBrand(selectPage.value,selectShow.value,event.target.value);
+
+    setCurrentProducts(products);
+    render(currentProducts, currentPagination);
+  }
+  // const products = await fetchProductsBrand(selectPage.value,selectShow.value,event.target.value);
+
+  // setCurrentProducts(products);
+  // render(currentProducts, currentPagination);
 
 });
 
