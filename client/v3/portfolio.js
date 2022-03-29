@@ -7,6 +7,9 @@ let currentPagination = {};
 
 let favoriteProducts = [];
 
+let currentFilter={price:false, release:false, brand:"All", favorite:false};
+
+
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
@@ -238,12 +241,19 @@ const renderBrands=brand=>{
   selectBrand.innerHTML+=options;
 }
 
+const FilterProductsByBrand = products =>{
+  if(currentFilter['brand']!=='All'){
+    products=products.filter(product=>product['brand']==currentFilter['brand']);
+  }
+  return products;
+}
 
 
 //filter by brands=========================================
 // const brand=ListBrands(currentProducts);
 
 const render = (products, pagination) => {
+  products=FilterProductsByBrand(products);
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
@@ -372,34 +382,36 @@ selectPage.addEventListener('change', event => {
   //   setCurrentProducts(products);
   //   render(currentProducts, currentPagination);
   // }
-  // fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
-  //   .then(setCurrentProducts)
-  //   .then(() => render(currentProducts, currentPagination));
-
-  fetchProductsFinal(parseInt(event.target.value),currentPagination.pageSize,selectBrand.value)
+  fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
+
+  // fetchProductsFinal(parseInt(event.target.value),currentPagination.pageSize,selectBrand.value)
+  //   .then(setCurrentProducts)
+  //   .then(() => render(currentProducts, currentPagination));
 });
 
 //filter by brands
 
 selectBrand.addEventListener('change', async event=>{
-  if(event.target.value=='All'){
-    const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
+  // if(event.target.value=='All'){
+  //   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
 
-    setCurrentProducts(products);
-    render(currentProducts, currentPagination);
-  }
-  else{
-    const products = await fetchProductsBrand(selectPage.value,selectShow.value,event.target.value);
+  //   setCurrentProducts(products);
+  //   render(currentProducts, currentPagination);
+  // }
+  // else{
+  //   const products = await fetchProductsBrand(selectPage.value,selectShow.value,event.target.value);
 
-    setCurrentProducts(products);
-    render(currentProducts, currentPagination);
-  }
+  //   setCurrentProducts(products);
+  //   render(currentProducts, currentPagination);
+  // }
   // const products = await fetchProductsBrand(selectPage.value,selectShow.value,event.target.value);
 
   // setCurrentProducts(products);
   // render(currentProducts, currentPagination);
+  currentFilter['brand']=event.target.value;
+  render(currentProducts, currentPagination);
 
 });
 
