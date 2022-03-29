@@ -1,0 +1,115 @@
+body {
+    color: #15172b;
+    font-family: "Roboto", sans-serif;
+    background-image: url(https://i.pinimg.com/236x/70/3f/6c/703f6cfc3cbe65140aefbe9bf13b64ee.jpg);
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  
+  a {
+    color: #15172b;
+  }
+  
+  
+h1 {
+    padding: 60px;
+    text-align: center;
+    background: #15172b;
+    color: white;
+    font-size: 30px;
+    font-family: "DM Serif Display", serif;
+    font-weight: normal;
+    line-height: 1;
+    background-image: url(https://github.com/Gregdur/NoSQL/blob/main/Clear-Fashion.png?raw=true);
+    background-color: #15172b;
+    background-position: 50% 50%;
+    height: 90px;
+  }
+
+h4 {
+    text-align: center;
+    font-size: 1.350em;
+    line-height: 1;
+    margin: 1em 0;
+    font-family: "DM Serif Display", serif;
+    font-weight: normal;
+    color: #4b4b4b;
+  }
+
+  h2,
+  h3 {
+    text-align: center;
+
+    font-size: 1.875em;
+    line-height: 1;
+    margin: 1em 0;
+    font-family: "DM Serif Display", serif;
+    font-weight: normal;
+    color: #4b4b4b;
+  }
+  
+  h3 {
+    font-size: 1.25em;
+  }
+  
+
+  .products-heading select {
+    appearance: none;
+    border: 0;
+    
+    font-size: 1.25em;
+    font-family: inherit;
+    margin-right: var(--body-padding);
+    padding-right: 1em;
+  }
+  
+  .products-heading [role="radiogroup"] {
+    display: none;
+  }
+
+
+  .option select{
+    appearance: none;
+    border: 0;
+    text-align: center;
+
+    font-size: 1.25em;
+    font-family: inherit;
+    margin-right: var(--body-padding);
+    padding-right: 1em;
+  }
+
+h5 {
+    text-align: center;
+    font-size: 1.150em;
+    line-height: 1;
+    margin: 1em 0;
+    font-family: "DM Serif Display", serif;
+    font-weight: normal;
+    color: #4b4b4b;
+}
+
+
+.fit-picture {
+  width: 50px;
+  vertical-align:-100%;
+  border-radius: 50%;
+}
+
+button{
+  background-color: #15172b;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 30px;
+  margin-top: 38px;
+  text-align: center;
+  width: 125px;
+  vertical-align:0%;
+}
